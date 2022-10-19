@@ -7,16 +7,16 @@ interface ICharacterCard {
 
 export function CharacterCard({ character }: ICharacterCard) {
   return (
-    <NextLink href={`/character/${character.name.toLocaleLowerCase()}`}>
+    <NextLink href={`/characters/${character.name.toLocaleLowerCase()}`}>
       <a
-        className="flex justify-center items-end relative w-48 h-48 rounded-md cursor-pointer group"
+        className="flex flex-col justify-center items-end rounded-md cursor-pointer group"
       >
         <img
-          className="h-full w-full rounded-md"
+          className="w-36 h-36 rounded-t-md"
           src={character.images[0].url}
           alt=""
         />
-        <h1 className="absolute bottom-0 left-0 right-0 opacity-0 w-full text-center bg-[#00152b] text-[#fff] rounded-b-md transition-opacity duration-500 group-hover:opacity-100">
+        <h1 className="w-full text-center text-xs bg-purple-800 text-[#fff] rounded-b-md">
           {character.name}
         </h1>
       </a>
