@@ -1,5 +1,6 @@
 export interface ICharacter {
   name: string;
+  slug: string;
   about: IAbout | null;
   images: IImage[] | [];
   __typename: string;

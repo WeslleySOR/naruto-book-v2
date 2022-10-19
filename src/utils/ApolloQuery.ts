@@ -10,6 +10,7 @@ export const GET_CHARACTERS_QUERY = gql`
       images {
         url
       }
+      slug
     }
   }
 `;
