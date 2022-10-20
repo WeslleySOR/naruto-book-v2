@@ -4,6 +4,9 @@ export const GET_CHARACTERS_QUERY = gql`
   query {
     characters {
       name
+      clan {
+        name
+      }
       about {
         html
       }

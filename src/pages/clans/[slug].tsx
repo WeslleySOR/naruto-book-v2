@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useContext } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
-import { CharactersContext } from "../../contexts/CharactersContext";
+import { ClansContext } from "../../contexts/ClansContext";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 interface IParams {
@@ -11,42 +11,41 @@ interface IParams {
 }
 
 export default function ClanPage(params: IParams) {
-  const { characters } = useContext(CharactersContext);
+  const { clans } = useContext(ClansContext);
   return (
     <>
       <Head>
-        <title>Naruto Book v2 - Character</title>
+        <title>Naruto Book v2 - Clan</title>
       </Head>
-      <main className="flex items-center gap-4 p-12">
-        {characters.length <= 0 ? (
+      <main className="flex items-center gap-4 py-12">
+        {clans.length <= 0 ? (
           <LoadingSpinner />
         ) : (
-          characters.map((character) => {
-            if (character.slug === params.params.slug) {
+          clans.map((clan) => {
+            if (clan.slug === params.params.slug) {
               return (
-                <div className="flex gap-6" key={character.name}>
-                  <div className="flex flex-col gap-2">
-                    <div className="w-80 h-w-80 rounded-md">
+                <div className="flex flex-col gap-6" key={clan.name}>
+                  <div className="flex flex-col gap-4">
+                    <div className="w-full">
                       <img
-                        className="w-full h-w-full rounded-md"
-                        src={character.images[0].url}
+                        className="w-full"
+                        src={clan.images[0].url}
                         alt=""
                       />
                     </div>
-                    <span className="text-lg">
-                      Nome: <strong>{character.name}</strong>
-                    </span>
+                    <strong className="text-lg text-center text-shadow-name-sm">Clã - {clan.name}</strong>
                   </div>
-                  <div className="flex flex-col">
-                    <h2 className="text-center text-2xl font-semibold mb-6">História</h2>
-                    {character.about ? (
+                  <div className="flex flex-col mt-12">
+                    <h2 className="text-2xl font-semibold px-4 mb-6">História</h2>
+                    {clan.about ? (
                       <div
+                        className="px-4"
                         dangerouslySetInnerHTML={{
-                          __html: character.about.html,
+                          __html: clan.about.html,
                         }}
                       />
                     ) : (
-                      <span>Nada encontrado.</span>
+                      <span className="px-4">Nada encontrado.</span>
                     )}
                   </div>
                 </div>

@@ -9,7 +9,7 @@ interface IHeaderNavLink {
 export function HeaderNavLink({name, slug, checked = false}: IHeaderNavLink) {
   return (
     <NextLink href={slug}>
-      <a className={`text-sm font-semibold uppercase ${checked && 'text-purple-400'}`}>{name}</a>
+      <a className={`text-sm font-semibold uppercase ${checked && 'text-[#11B5E4]'}`}>{name}</a>
     </NextLink>
   );
 }

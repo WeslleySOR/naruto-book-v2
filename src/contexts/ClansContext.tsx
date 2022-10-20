@@ -27,7 +27,7 @@ export const ClansContextProvider = ({
       .query({
         query: GET_CLANS_QUERY,
       })
-      .then(({ data }) => {
+      .then(({ data }) => {        
         setClans(data.clans);
       })
       .catch((error) => console.error(error));

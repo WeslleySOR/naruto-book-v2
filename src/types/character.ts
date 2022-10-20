@@ -1,5 +1,9 @@
 export interface ICharacter {
   name: string;
+  clan: {
+    name: string | null;
+    __typename: string;
+  };
   slug: string;
   about: IAbout | null;
   images: IImage[] | [];
