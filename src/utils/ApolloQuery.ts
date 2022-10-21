@@ -7,6 +7,9 @@ export const GET_CHARACTERS_QUERY = gql`
       clan {
         name
       }
+      bijuu {
+        name
+      }
       about {
         html
       }
@@ -21,6 +24,21 @@ export const GET_CHARACTERS_QUERY = gql`
 export const GET_CLANS_QUERY = gql`
   query {
     clans {
+      name
+      about {
+        html
+      }
+      images {
+        url
+      }
+      slug
+    }
+  }
+`;
+
+export const GET_BIJUUS_QUERY = gql`
+  query {
+    bijuus {
       name
       about {
         html

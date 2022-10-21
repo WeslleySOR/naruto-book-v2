@@ -7,12 +7,12 @@ interface IClanCard {
 
 export function ClanCard({ clan }: IClanCard) {
   return (
-    <NextLink href={`/clans/${clan.name.toLocaleLowerCase()}`}>
+    <NextLink href={`/clans/${clan.slug}`}>
       <a
         className="flex flex-col justify-center items-end rounded-md cursor-pointer border-2 border-solid border-[#11B5E4]"
       >
         <img
-          className="h-36 w-36"
+          className="h-48 w-48 rounded-t-md"
           src={clan.images[0].url}
           alt=""
         />

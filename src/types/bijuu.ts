@@ -1,13 +1,5 @@
-export interface ICharacter {
+export interface IBijuu {
   name: string;
-  clan: {
-    name: string | null;
-    __typename: string;
-  };
-  bijuu: {
-    name: string | null;
-    __typename: string;
-  };
   slug: string;
   about: IAbout | null;
   images: IImage[] | [];

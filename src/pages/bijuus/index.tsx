@@ -1,25 +1,24 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { CharacterCard } from "../../components/CharacterCard";
+import { BijuuCard } from "../../components/BijuuCard";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
-import { CharactersContext } from "../../contexts/CharactersContext";
+import { BijuusContext } from "../../contexts/BijuusContext";
 
 export default function Bijuus() {
-  const { characters } = useContext(CharactersContext);
+  const { bijuus } = useContext(BijuusContext)
   return (
     <>
       <Head>
-        <title>Naruto Book v2 - Beasts</title>
+        <title>Naruto Book v2 - Bijuus</title>
       </Head>
-      <main className="flex justify-center items-center gap-4 py-12 px-6">
-        <p>Beasts Page</p>
-        {/* {characters.length <= 0 ? (
+      <main className="flex flex-wrap justify-center items-center gap-6 py-12 px-6">
+        {bijuus.length <= 0 ? (
           <LoadingSpinner />
         ) : (
-          characters.map((character) => (
-            <CharacterCard key={character.about?.html} character={character} />
+          bijuus.map((bijuu) => (
+            <BijuuCard key={bijuu.about?.html} bijuu={bijuu} />
           ))
-        )} */}
+        )}
       </main>
     </>
   );

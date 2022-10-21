@@ -1,7 +1,8 @@
 import Head from "next/head";
+import NextLink from 'next/link'
 import { useContext } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
-import { CharactersContext } from "../../contexts/CharactersContext";
+import { BijuusContext } from "../../contexts/BijuusContext";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 interface IParams {
@@ -11,42 +12,41 @@ interface IParams {
 }
 
 export default function BijuuPage(params: IParams) {
-  const { characters } = useContext(CharactersContext);
+  const { bijuus } = useContext(BijuusContext);
   return (
     <>
       <Head>
-        <title>Naruto Book v2 - Character</title>
+        <title>Naruto Book v2 - Bijuu</title>
       </Head>
-      <main className="flex items-center gap-4 p-12">
-        {characters.length <= 0 ? (
+      <main className="flex items-center gap-4 py-12">
+        {bijuus.length <= 0 ? (
           <LoadingSpinner />
         ) : (
-          characters.map((character) => {
-            if (character.slug === params.params.slug) {
+          bijuus.map((bijuu) => {
+            if (bijuu.slug === params.params.slug) {
               return (
-                <div className="flex gap-6" key={character.name}>
-                  <div className="flex flex-col gap-2">
-                    <div className="w-80 h-w-80 rounded-md">
+                <div className="flex flex-col gap-6" key={bijuu.name}>
+                  <div className="flex flex-col gap-1">
+                    <div className="w-full">
                       <img
-                        className="w-full h-w-full rounded-md"
-                        src={character.images[0].url}
+                        className="w-full"
+                        src={bijuu.images[0].url}
                         alt=""
                       />
                     </div>
-                    <span className="text-lg">
-                      Nome: <strong>{character.name}</strong>
-                    </span>
+                    <strong className="text-lg text-center">{bijuu.name}</strong>
                   </div>
-                  <div className="flex flex-col">
-                    <h2 className="text-center text-2xl font-semibold mb-6">História</h2>
-                    {character.about ? (
+                  <div className="flex flex-col mt-12">
+                    <h2 className="text-2xl font-semibold px-4 mb-6">História</h2>
+                    {bijuu.about ? (
                       <div
+                        className="px-4"
                         dangerouslySetInnerHTML={{
-                          __html: character.about.html,
+                          __html: bijuu.about.html,
                         }}
                       />
                     ) : (
-                      <span>Nada encontrado.</span>
+                      <span className="px-4">Nada encontrado.</span>
                     )}
                   </div>
                 </div>

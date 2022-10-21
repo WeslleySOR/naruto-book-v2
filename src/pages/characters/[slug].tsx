@@ -27,9 +27,9 @@ export default function CharacterPage(params: IParams) {
               return (
                 <div className="flex flex-col gap-6" key={character.name}>
                   <div className="flex flex-col gap-1">
-                    <div className="w-full rounded-md">
+                    <div className="w-full">
                       <img
-                        className="w-full rounded-md"
+                        className="w-full"
                         src={character.images[0].url}
                         alt=""
                       />
@@ -39,7 +39,7 @@ export default function CharacterPage(params: IParams) {
                   <div className="flex flex-col gap-2 p-4 mx-4 rounded-md bg-zinc-800">
                     <span>Clan: {character.clan !== null ? <NextLink href={`/clans/${character.clan.name?.toLowerCase()}`}><a className="underline underline-offset-2">{character.clan.name}</a></NextLink> : "Desconhecido"}</span>
                     <span>Patente Ninja: Nenhuma</span>
-                    <span>Bijuu: Nenhuma</span>
+                    <span>Bijuu: {character.bijuu !== null ? <NextLink href={`/bijuus/${character.bijuu.name?.toLowerCase()}`}><a className="underline underline-offset-2">{character.bijuu.name}</a></NextLink> : "Não possui"}</span>
                   </div>
                   <div className="flex flex-col mt-12">
                     <h2 className="text-2xl font-semibold px-4 mb-6">História</h2>

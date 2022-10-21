@@ -1,8 +1,12 @@
 import Head from "next/head";
-import { useContext } from "react";
+import NextLink from 'next/link'
+import { useContext, useEffect, useState } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { ClansContext } from "../../contexts/ClansContext";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { CharactersContext } from "../../contexts/CharactersContext";
+import { ICharacter } from "../../types/character";
+import { IClan } from "../../types/clan";
 
 interface IParams {
   params: {
@@ -11,7 +15,22 @@ interface IParams {
 }
 
 export default function ClanPage(params: IParams) {
+  const [membersClan, setMembersClan] = useState<ICharacter[]>([])
+  const { characters } = useContext(CharactersContext);
   const { clans } = useContext(ClansContext);
+
+  const ActualClanPage = clans.filter(clan => clan.slug === params.params.slug);
+  console.log(ActualClanPage)
+
+  const returnAllMembersByClan = (clanName: IClan) => {
+    var AllMembersByClan: ICharacter[] = [];
+    if(characters.length > 0) AllMembersByClan = characters.filter(character => character.clan !== null && character.clan.name === clanName.name);
+    return setMembersClan(AllMembersByClan);
+  }
+
+  useEffect(() => {
+    returnAllMembersByClan(ActualClanPage[0]);
+  }, [])
   return (
     <>
       <Head>
@@ -34,6 +53,9 @@ export default function ClanPage(params: IParams) {
                       />
                     </div>
                     <strong className="text-lg text-center text-shadow-name-sm">Clã - {clan.name}</strong>
+                  </div>
+                  <div className="flex flex-col gap-2 p-4 mx-4 rounded-md bg-zinc-800">
+                    <span>Membros: {membersClan.map((character, index) => <><NextLink href={`/characters/${character.slug}`}><a className="underline">{character.name}</a></NextLink>{index < membersClan.length - 1 && <span>, </span>}</>)}</span>
                   </div>
                   <div className="flex flex-col mt-12">
                     <h2 className="text-2xl font-semibold px-4 mb-6">História</h2>

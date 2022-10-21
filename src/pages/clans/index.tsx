@@ -11,7 +11,7 @@ export default function Clans() {
       <Head>
         <title>Naruto Book v2 - Clans</title>
       </Head>
-      <main className="flex justify-center items-center gap-4 py-12 px-6">
+      <main className="flex flex-wrap justify-center items-center gap-6 py-12">
         {clans.length <= 0 ? (
           <LoadingSpinner />
         ) : (
