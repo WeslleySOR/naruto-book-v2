@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { ClansContext } from "../../contexts/ClansContext";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -13,6 +13,9 @@ interface IParams {
 
 export default function ClanPage(params: IParams) {
   const { clans } = useContext(ClansContext);
+  useEffect(() => {
+    console.log(params, 'Teste')
+  }, [])
   return (
     <>
       <Head>
