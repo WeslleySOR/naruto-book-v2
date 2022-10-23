@@ -50,6 +50,8 @@ export default function CharacterPage(params: IParams) {
                           {character.clan !== null ? (
                             <NextLink
                               href={`/clans/${character.clan.name?.toLowerCase()}`}
+                              as={`/clans/${character.clan.name?.toLowerCase()}`}
+                              passHref
                             >
                               <a className="underline underline-offset-2">
                                 {character.clan.name}
@@ -65,6 +67,8 @@ export default function CharacterPage(params: IParams) {
                           {character.bijuu !== null ? (
                             <NextLink
                               href={`/bijuus/${character.bijuu.name?.toLowerCase()}`}
+                              as={`/bijuus/${character.bijuu.name?.toLowerCase()}`}
+                              passHref
                             >
                               <a className="underline underline-offset-2">
                                 {character.bijuu.name}

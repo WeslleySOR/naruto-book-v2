@@ -8,7 +8,7 @@ interface IHeaderNavLink {
 
 export function HeaderNavLink({name, slug, checked = false}: IHeaderNavLink) {
   return (
-    <NextLink href={slug}>
+    <NextLink href={slug} as={slug} passHref>
       <a className={`text-sm font-semibold uppercase ${checked && 'text-[#11B5E4]'}`}>{name}</a>
     </NextLink>
   );
