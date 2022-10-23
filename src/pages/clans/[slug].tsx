@@ -1,5 +1,4 @@
 import Head from "next/head";
-import NextLink from "next/link";
 import { useContext } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { ClansContext } from "../../contexts/ClansContext";
