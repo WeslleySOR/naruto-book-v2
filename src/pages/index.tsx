@@ -6,9 +6,9 @@ export default function Home() {
       <Head>
         <title>Naruto Book v2 - Home</title>
       </Head>
-      <main className="flex flex-col justify-center items-center gap-8 py-12 px-6">
-        <h1 className="text-2xl font-bold">Naruto Book v2</h1>
-        <p className="w-full text-center">
+      <main className="flex flex-col justify-center gap-8 py-12 px-6 lg:px-16">
+        <h1 className="text-2xl font-bold text-center">Naruto Book v2</h1>
+        <p className="w-full">
           Como o próprio nome ja diz é uma versão 2 de um outro Naruto Book,
           porém totalmente diferente, tanto o layout quanto as libs.
         </p>

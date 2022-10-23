@@ -27,11 +27,11 @@ export default function BijuuPage(params: IParams) {
             if (bijuu.slug === params.params.slug) {
               return (
                 <div
-                  className="flex flex-col gap-6 lg:flex-row"
+                  className="flex flex-col items-center gap-6 lg:flex-row lg:items-start"
                   key={bijuu.name}
                 >
                   <div className="flex flex-col gap-2 w-fit">
-                    <div className="w-screen h-[100vw] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
+                    <div className="h-[calc(100vw-4rem)] max-h-[512px] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
                       <ImageWrapper
                         src={bijuu.images[0].url}
                         alt={`Imagem do(a): ${bijuu.name}`}
