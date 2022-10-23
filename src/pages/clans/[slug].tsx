@@ -1,12 +1,10 @@
 import Head from "next/head";
-import NextLink from 'next/link'
-import { useContext, useEffect, useState } from "react";
+import NextLink from "next/link";
+import { useContext } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { ClansContext } from "../../contexts/ClansContext";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { CharactersContext } from "../../contexts/CharactersContext";
-import { ICharacter } from "../../types/character";
-import { IClan } from "../../types/clan";
+import { ImageWrapper } from "../../components/ImageWrapper";
 
 interface IParams {
   params: {
@@ -15,22 +13,7 @@ interface IParams {
 }
 
 export default function ClanPage(params: IParams) {
-  const [membersClan, setMembersClan] = useState<ICharacter[]>([])
-  const { characters } = useContext(CharactersContext);
   const { clans } = useContext(ClansContext);
-
-  const ActualClanPage = clans.filter(clan => clan.slug === params.params.slug);
-  console.log(ActualClanPage)
-
-  const returnAllMembersByClan = (clanName: IClan) => {
-    var AllMembersByClan: ICharacter[] = [];
-    if(characters.length > 0) AllMembersByClan = characters.filter(character => character.clan !== null && character.clan.name === clanName.name);
-    return setMembersClan(AllMembersByClan);
-  }
-
-  useEffect(() => {
-    returnAllMembersByClan(ActualClanPage[0]);
-  }, [])
   return (
     <>
       <Head>
@@ -43,33 +26,35 @@ export default function ClanPage(params: IParams) {
           clans.map((clan) => {
             if (clan.slug === params.params.slug) {
               return (
-                <div className="flex flex-col gap-6" key={clan.name}>
-                  <div className="flex flex-col gap-4">
-                    <div className="w-full">
-                      <img
-                        className="w-full"
+                <div
+                  className="flex flex-col gap-6 lg:flex-row"
+                  key={clan.name}
+                >
+                  <div className="flex flex-col gap-2 w-fit">
+                    <div className="w-screen h-[100vw] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
+                      <ImageWrapper
                         src={clan.images[0].url}
-                        alt=""
+                        alt={`Imagem do(a): ${clan.name}`}
                       />
                     </div>
-                    <strong className="text-lg text-center text-shadow-name-sm">Clã - {clan.name}</strong>
+                    <strong className="text-lg text-center">
+                      {clan.name}
+                    </strong>
                   </div>
-                  <div className="flex flex-col gap-2 p-4 mx-4 rounded-md bg-zinc-800">
-                    <span>Membros: {membersClan.map((character, index) => <><NextLink href={`/characters/${character.slug}`}><a className="underline">{character.name}</a></NextLink>{index < membersClan.length - 1 && <span>, </span>}</>)}</span>
-                  </div>
-                  <div className="flex flex-col mt-12">
-                    <h2 className="text-2xl font-semibold px-4 mb-6">História</h2>
-                    {clan.about ? (
+                  {clan.about ? (
+                    <div className="flex flex-col gap-6 mt-2 mx-0 lg:mx-6 lg:mt-0">
                       <div
-                        className="px-4"
+                        className="px-4 mt-8 lg:mt-0 lg:px-0"
                         dangerouslySetInnerHTML={{
                           __html: clan.about.html,
                         }}
                       />
-                    ) : (
-                      <span className="px-4">Nada encontrado.</span>
-                    )}
-                  </div>
+                    </div>
+                  ) : (
+                    <span className="px-4 mt-8 lg:mt-0 lg:px-0">
+                      Nada encontrado.
+                    </span>
+                  )}
                 </div>
               );
             }

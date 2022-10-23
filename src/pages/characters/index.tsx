@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { CardComponent } from "../../components/CardComponent";
+import { CardWrapper } from "../../components/CardWrapper";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { CharactersContext } from "../../contexts/CharactersContext";
 
@@ -16,9 +16,9 @@ export default function Characters() {
           <LoadingSpinner />
         ) : (
           characters.map((character) => (
-            <CardComponent
+            <CardWrapper
               key={character.slug}
-              slug={character.slug}
+              url={`/characters/${character.slug}`}
               image={character.images[0].url}
               name={character.name}
             />

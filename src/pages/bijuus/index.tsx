@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { CardComponent } from "../../components/CardComponent";
+import { CardWrapper } from "../../components/CardWrapper";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { BijuusContext } from "../../contexts/BijuusContext";
 
@@ -16,9 +16,9 @@ export default function Bijuus() {
           <LoadingSpinner />
         ) : (
           bijuus.map((bijuu) => (
-            <CardComponent
+            <CardWrapper
               key={bijuu.slug}
-              slug={bijuu.slug}
+              url={`/bijuus/${bijuu.slug}`}
               image={bijuu.images[0].url}
               name={bijuu.name}
             />

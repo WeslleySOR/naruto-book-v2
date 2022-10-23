@@ -1,9 +1,10 @@
 import Head from "next/head";
-import NextLink from 'next/link'
+import NextLink from "next/link";
 import { useContext } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { BijuusContext } from "../../contexts/BijuusContext";
 import { GetStaticPaths, GetStaticProps } from "next";
+import { ImageWrapper } from "../../components/ImageWrapper";
 
 interface IParams {
   params: {
@@ -25,30 +26,35 @@ export default function BijuuPage(params: IParams) {
           bijuus.map((bijuu) => {
             if (bijuu.slug === params.params.slug) {
               return (
-                <div className="flex flex-col gap-6" key={bijuu.name}>
-                  <div className="flex flex-col gap-1">
-                    <div className="w-full">
-                      <img
-                        className="w-full"
+                <div
+                  className="flex flex-col gap-6 lg:flex-row"
+                  key={bijuu.name}
+                >
+                  <div className="flex flex-col gap-2 w-fit">
+                    <div className="w-screen h-[100vw] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
+                      <ImageWrapper
                         src={bijuu.images[0].url}
-                        alt=""
+                        alt={`Imagem do(a): ${bijuu.name}`}
                       />
                     </div>
-                    <strong className="text-lg text-center">{bijuu.name}</strong>
+                    <strong className="text-lg text-center">
+                      {bijuu.name}
+                    </strong>
                   </div>
-                  <div className="flex flex-col mt-12">
-                    <h2 className="text-2xl font-semibold px-4 mb-6">História</h2>
-                    {bijuu.about ? (
+                  {bijuu.about ? (
+                    <div className="flex flex-col gap-6 mt-2 mx-0 lg:mx-6 lg:mt-0">
                       <div
-                        className="px-4"
+                        className="px-4 mt-8 lg:mt-0 lg:px-0"
                         dangerouslySetInnerHTML={{
                           __html: bijuu.about.html,
                         }}
                       />
-                    ) : (
-                      <span className="px-4">Nada encontrado.</span>
-                    )}
-                  </div>
+                    </div>
+                  ) : (
+                    <span className="px-4 mt-8 lg:mt-0 lg:px-0">
+                      Nada encontrado.
+                    </span>
+                  )}
                 </div>
               );
             }

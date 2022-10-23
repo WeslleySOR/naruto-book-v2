@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { CardComponent } from "../../components/CardComponent";
+import { CardWrapper } from "../../components/CardWrapper";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { ClansContext } from "../../contexts/ClansContext";
 
@@ -16,9 +16,9 @@ export default function Clans() {
           <LoadingSpinner />
         ) : (
           clans.map((clan) => (
-            <CardComponent
+            <CardWrapper
               key={clan.slug}
-              slug={clan.slug}
+              url={`/clans/${clan.slug}`}
               image={clan.images[0].url}
               name={clan.name}
             />
