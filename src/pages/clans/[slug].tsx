@@ -13,16 +13,13 @@ interface IParams {
 
 export default function ClanPage(params: IParams) {
   const { clans } = useContext(ClansContext);
-  useEffect(() => {
-    console.log(params, 'Teste')
-  }, [])
   return (
     <>
       <Head>
         <title>Naruto Book v2 - Clan</title>
       </Head>
       <main className="flex items-center gap-4 py-12">
-        {clans.length <= 0 ? (
+        {clans.length <= 0 || params.params.slug === undefined ? (
           <LoadingSpinner />
         ) : (
           clans.map((clan) => {
