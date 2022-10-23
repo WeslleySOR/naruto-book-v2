@@ -1,47 +1,37 @@
 import Head from "next/head";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { ClansContext } from "../../contexts/ClansContext";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ImageWrapper } from "../../components/ImageWrapper";
 
-interface IParams {
-  params: {
-    slug: string;
-  };
-}
-
-export default function ClanPage(params: IParams) {
+export default function ClanPage({ slug }: IParams) {
   const { clans } = useContext(ClansContext);
-  useEffect(() => {
-    console.log(params)
-  }, [])
+
   return (
     <>
       <Head>
         <title>Naruto Book v2 - Clan</title>
       </Head>
       <main className="flex items-center gap-4 py-12">
-        {clans.length <= 0 || params.params.slug === undefined ? (
+        {clans.length <= 0 || slug === undefined ? (
           <LoadingSpinner />
         ) : (
           clans.map((clan) => {
-            if (clan.slug === params.params.slug) {
+            if (clan.slug === slug) {
               return (
                 <div
                   className="flex flex-col items-center gap-6 lg:flex-row lg:items-start"
                   key={clan.name}
                 >
                   <div className="flex flex-col gap-2 w-fit">
-                  <div className="h-[calc(100vw-4rem)] max-h-[512px] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
+                    <div className="h-[calc(100vw-4rem)] max-h-[512px] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
                       <ImageWrapper
                         src={clan.images[0].url}
                         alt={`Imagem do(a): ${clan.name}`}
                       />
                     </div>
-                    <strong className="text-lg text-center">
-                      {clan.name}
-                    </strong>
+                    <strong className="text-lg text-center">{clan.name}</strong>
                   </div>
                   {clan.about ? (
                     <div className="flex flex-col gap-6 mt-2 mx-0 lg:mx-6 lg:mt-0">
@@ -74,11 +64,14 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   };
 };
 
+interface IParams {
+  params: { slug: string };
+}
 export const getStaticProps: GetStaticProps = async (context) => {
-  const params = context.params as unknown as IParams;
+  const { params } = context;
   return {
     props: {
-      params,
+      slug: params?.slug,
     },
   };
 };

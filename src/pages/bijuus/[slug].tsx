@@ -5,13 +5,7 @@ import { BijuusContext } from "../../contexts/BijuusContext";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ImageWrapper } from "../../components/ImageWrapper";
 
-interface IParams {
-  params: {
-    slug: string;
-  };
-}
-
-export default function BijuuPage(params: IParams) {
+export default function BijuuPage({ slug }: IParams) {
   const { bijuus } = useContext(BijuusContext);
   return (
     <>
@@ -23,7 +17,7 @@ export default function BijuuPage(params: IParams) {
           <LoadingSpinner />
         ) : (
           bijuus.map((bijuu) => {
-            if (bijuu.slug === params.params.slug) {
+            if (bijuu.slug === slug) {
               return (
                 <div
                   className="flex flex-col items-center gap-6 lg:flex-row lg:items-start"
@@ -71,11 +65,14 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   };
 };
 
+interface IParams {
+  params: { slug: string };
+}
 export const getStaticProps: GetStaticProps = async (context) => {
-  const params = context.params as unknown as IParams;
+  const { params } = context;
   return {
     props: {
-      params,
+      slug: params?.slug,
     },
   };
 };

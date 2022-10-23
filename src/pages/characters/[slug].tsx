@@ -6,13 +6,7 @@ import { CharactersContext } from "../../contexts/CharactersContext";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ImageWrapper } from "../../components/ImageWrapper";
 
-interface IParams {
-  params: {
-    slug: string;
-  };
-}
-
-export default function CharacterPage(params: IParams) {
+export default function CharacterPage({ slug }: IParams) {
   const { characters } = useContext(CharactersContext);
   return (
     <>
@@ -24,14 +18,14 @@ export default function CharacterPage(params: IParams) {
           <LoadingSpinner />
         ) : (
           characters.map((character) => {
-            if (character.slug === params.params.slug) {
+            if (character.slug === slug) {
               return (
                 <div
                   className="flex flex-col items-center gap-6 lg:flex-row lg:items-start"
                   key={character.name}
                 >
                   <div className="flex flex-col gap-2 w-fit">
-                  <div className="h-[calc(100vw-4rem)] max-h-[512px] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
+                    <div className="h-[calc(100vw-4rem)] max-h-[512px] rounded ring-2 ring-[#11B5E4] ring-offset-4 ring-offset-[#df8236] mx-8 lg:w-[512px] lg:h-[512px]">
                       <ImageWrapper
                         src={character.images[0].url}
                         alt={`Imagem do(a): ${character.name}`}
@@ -108,11 +102,14 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   };
 };
 
+interface IParams {
+  params: { slug: string };
+}
 export const getStaticProps: GetStaticProps = async (context) => {
-  const params = context.params as unknown as IParams;
+  const { params } = context;
   return {
     props: {
-      params,
+      slug: params?.slug,
     },
   };
 };
