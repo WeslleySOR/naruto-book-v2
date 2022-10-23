@@ -13,6 +13,9 @@ interface IParams {
 
 export default function ClanPage(params: IParams) {
   const { clans } = useContext(ClansContext);
+  useEffect(() => {
+    console.log(params)
+  }, [])
   return (
     <>
       <Head>
