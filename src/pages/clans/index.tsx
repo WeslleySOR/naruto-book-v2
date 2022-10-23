@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { ClanCard } from "../../components/ClanCard";
+import { CardComponent } from "../../components/CardComponent";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { ClansContext } from "../../contexts/ClansContext";
 
 export default function Clans() {
-  const { clans } = useContext(ClansContext)
+  const { clans } = useContext(ClansContext);
   return (
     <>
       <Head>
@@ -16,7 +16,12 @@ export default function Clans() {
           <LoadingSpinner />
         ) : (
           clans.map((clan) => (
-            <ClanCard key={clan.about?.html} clan={clan} />
+            <CardComponent
+              key={clan.slug}
+              slug={clan.slug}
+              image={clan.images[0].url}
+              name={clan.name}
+            />
           ))
         )}
       </main>

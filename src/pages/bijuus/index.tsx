@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { BijuuCard } from "../../components/BijuuCard";
+import { CardComponent } from "../../components/CardComponent";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { BijuusContext } from "../../contexts/BijuusContext";
 
 export default function Bijuus() {
-  const { bijuus } = useContext(BijuusContext)
+  const { bijuus } = useContext(BijuusContext);
   return (
     <>
       <Head>
@@ -16,7 +16,12 @@ export default function Bijuus() {
           <LoadingSpinner />
         ) : (
           bijuus.map((bijuu) => (
-            <BijuuCard key={bijuu.about?.html} bijuu={bijuu} />
+            <CardComponent
+              key={bijuu.slug}
+              slug={bijuu.slug}
+              image={bijuu.images[0].url}
+              name={bijuu.name}
+            />
           ))
         )}
       </main>

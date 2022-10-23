@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useContext } from "react";
-import { CharacterCard } from "../../components/CharacterCard";
+import { CardComponent } from "../../components/CardComponent";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
 import { CharactersContext } from "../../contexts/CharactersContext";
 
 export default function Characters() {
-  const { characters } = useContext(CharactersContext)
+  const { characters } = useContext(CharactersContext);
   return (
     <>
       <Head>
@@ -16,7 +16,12 @@ export default function Characters() {
           <LoadingSpinner />
         ) : (
           characters.map((character) => (
-            <CharacterCard key={character.about?.html} character={character} />
+            <CardComponent
+              key={character.slug}
+              slug={character.slug}
+              image={character.images[0].url}
+              name={character.name}
+            />
           ))
         )}
       </main>
